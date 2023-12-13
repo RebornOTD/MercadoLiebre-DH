@@ -1,19 +1,22 @@
-const express = require('express');
-const app = express();
-app.use(express.static('public'));
+const express = require('express')
+const app = express()
+const port = 3030
+
+const path = require("path")
+
+app.use(express.static("public"))
+
+app.get("/",(req,res)=>{
+    res.sendFile(path.resolve('./views/home.html'));
+})
+
+app.get("/register",(req,res)=>{
+    res.sendFile(path.resolve('./views/register.html'));
+})
+
+app.get("/login",(req,res)=>{
+    res.sendFile(path.resolve('./views/login.html'));
+})
 
 
-const port = process.env.PORT || 3001
-app.listen(port, () => console.log(`Servidor ejecutandose en el puerto ${port}!`))
-
-app.get('/', (req,res)=>{
-    res.sendFile(__dirname + '/views/home.html');
-});
-
-app.get('/login', (req,res)=>{
-    res.sendFile(__dirname + '/views/login.html');
-});
-
-app.get('/register', (req,res)=>{
-    res.sendFile(__dirname + '/views/register.html');
-});
+app.listen(port, () => console.log(`Example app listening on port ${port}!`))
